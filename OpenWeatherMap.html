@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Wetter</title>
+</head>
+<body>
+
+
+  <div class="weather-data">
+    <div class="temperature">Temperatur: <span class="temperature-value"></span></div>
+    <div class="feels-like-temperature">Gefühlte Temperatur: <span class="feels-like-temperature-value"></span></div>
+    <div class="pressure">Luftdruck: <span class="pressure-value"></span> hPa</div>
+    <div class="humidity">Luftfeuchtigkeit: <span class="humidity-value"></span>%</div>
+    <div class="wind-speed">Windgeschwindigkeit: <span class="wind-speed-value"></span> km/h</div>
+    <div class="wind-direction">Windrichtung: <span class="wind-direction-value"></span>°</div>
+    <div class="weather-description">Wetterbeschreibung: <span class="weather-description-value"></span></div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      fetch("https://api.openweathermap.org/data/2.5/weather?q=YOUR_CITY&appid=YOUR_API_KEY&units=metric")
+        .then(response => response.json())
+        .then(data => {
+          const temperature = data.main.temp;
+          const feelsLikeTemperature = data.main.feels_like;
+          const pressure = data.main.pressure;
+          const humidity = data.main.humidity;
+          const windSpeed = data.wind.speed;
+          const windDirection = data.wind.deg;
+          const weatherDescription = data.weather[0].description;
+
+          document.querySelector(".temperature-value").textContent = temperature + " °C";
+          document.querySelector(".feels-like-temperature-value").textContent = feelsLikeTemperature + " °C";
+          document.querySelector(".pressure-value").textContent = pressure;
+          document.querySelector(".humidity-value").textContent = humidity;
+          document.querySelector(".wind-speed-value").textContent = windSpeed;
+          document.querySelector(".wind-direction-value").textContent = windDirection;
+          document.querySelector(".weather-description-value").textContent = weatherDescription;
+        })
+        .catch(error => {
+          console.error("Fehler beim Abrufen der Wetterdaten: " + error);
+        });
+    };
+  </script>
+</body>
+</html>

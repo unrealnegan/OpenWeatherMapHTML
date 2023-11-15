@@ -14,7 +14,6 @@
     <div class="humidity">Luftfeuchtigkeit: <span class="humidity-value"></span>%</div>
     <div class="wind-speed">Windgeschwindigkeit: <span class="wind-speed-value"></span> km/h</div>
     <div class="wind-direction">Windrichtung: <span class="wind-direction-value"></span>°</div>
-    <div class="weather-description">Wetterbeschreibung: <span class="weather-description-value"></span></div>
   </div>
 
   <script>
@@ -28,7 +27,6 @@
           const humidity = data.main.humidity;
           const windSpeed = data.wind.speed;
           const windDirection = data.wind.deg;
-          const weatherDescription = data.weather[0].description;
 
           document.querySelector(".temperature-value").textContent = temperature + " °C";
           document.querySelector(".feels-like-temperature-value").textContent = feelsLikeTemperature + " °C";
@@ -36,7 +34,6 @@
           document.querySelector(".humidity-value").textContent = humidity;
           document.querySelector(".wind-speed-value").textContent = windSpeed;
           document.querySelector(".wind-direction-value").textContent = windDirection;
-          document.querySelector(".weather-description-value").textContent = weatherDescription;
         })
         .catch(error => {
           console.error("Fehler beim Abrufen der Wetterdaten: " + error);
